@@ -18,9 +18,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "tb_usuario")
 public class UsuarioModel {
-	
+
 	/**
 	 * Definindo os pares e valores da entidade Usuario
+	 * 
 	 * @author Guilherme Rodrigues
 	 */
 
@@ -40,13 +41,28 @@ public class UsuarioModel {
 	@NotNull(message = "A senha não pode ser nula")
 	@NotBlank(message = "A senha precisa conter caracteres")
 	private String senha;
-	
+
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties("usuario")
 	private List<PostagemModel> postagem = new ArrayList<>();
 
 	public List<PostagemModel> getPostagem() {
 		return postagem;
+	}
+
+	public UsuarioModel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public UsuarioModel(
+			@NotNull(message = "O nome não pode ser nulo") @NotBlank(message = "O nome tem que conter caracteres") String nome,
+			@NotNull(message = "O email não pode ser nulo") @NotBlank(message = "O email tem que conter caracteres") @Email(message = "O email precisa ter o @ pra dizer que é um email") String email,
+			@NotNull(message = "A senha não pode ser nula") @NotBlank(message = "A senha precisa conter caracteres") String senha) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
 	}
 
 	public void setPostagem(List<PostagemModel> postagem) {
